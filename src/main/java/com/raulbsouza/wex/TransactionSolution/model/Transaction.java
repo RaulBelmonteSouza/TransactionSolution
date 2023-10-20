@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -28,7 +29,7 @@ public class Transaction {
     @Size(max = 50, message = "${description.not-valid}")
     private String description;
 
-    private BigInteger amount;
+    private BigDecimal amount;
 
     @Column(name = "transaction_date")
     @NotNull(message = "${date.null}")
