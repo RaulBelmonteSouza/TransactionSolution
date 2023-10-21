@@ -1,9 +1,9 @@
-DROP TABLE IF EXISTS "transaction";
+DROP TABLE IF EXISTS "TRANSACTION";
 
-CREATE TABLE "transaction" (
-    "transaction_id" uuid DEFAULT random_uuid(),
-    "description" VARCHAR(50) NOT NULL,
-    "transaction_date" DATE NOT NULL,
-    "amount" NUMERIC NOT NULL,
-    PRIMARY KEY ("transaction_id")
+CREATE TABLE "TRANSACTION" (
+    "TRANSACTION_ID" uuid DEFAULT random_uuid(),
+    "DESCRIPTION" VARCHAR(50) NOT NULL,
+    "TRANSACTION_DATE" DATE NOT NULL,
+    "AMOUNT" NUMERIC NOT NULL,
+    PRIMARY KEY ("TRANSACTION_ID")
 )
