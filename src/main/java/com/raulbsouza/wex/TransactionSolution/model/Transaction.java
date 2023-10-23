@@ -22,12 +22,12 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
 
-    @Size(max = 50, message = "${description.not-valid}")
+    @Size(max = 50, message = "{description.not-valid}")
     private String description;
 
     private BigDecimal amount;
 
     @Column(name = "TRANSACTION_DATE")
-    @NotNull(message = "${date.null}")
+    @NotNull(message = "{date.null}")
     private LocalDate date;
 }
