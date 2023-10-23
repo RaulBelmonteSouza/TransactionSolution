@@ -10,9 +10,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface ExchangeRateClient {
 
     String GET_ALL_VALID_CURRENCIES
-            = "?fields=country_currency_desc&filter=record_date:gte:{data}&page[size]=350";
+            = "?fields={fields}&filter=record_date:gte:{data}&page[size]=350";
+    String GET_EXCHANGE_HISTORY_FOR_COUNTRY = "?fields={fields}" +
+            "&filter=country_currency_desc:eq:{currency},record_date:gte:{startDate},record_date:lte:{endDate}" +
+            "&sort=-record_date";
 
     @RequestMapping(method = RequestMethod.GET,
             value = ExchangeRateFields.RATES_OF_EXCHANGE_ENDPOINT + GET_ALL_VALID_CURRENCIES)
-    ExchangeRateDataDTO getExchangeRateDate(@PathVariable String data);
+    ExchangeRateDataDTO getExchangeRateDate(@PathVariable String[] fields, @PathVariable String data);
+
+    @RequestMapping(method = RequestMethod.GET,
+            value = ExchangeRateFields.RATES_OF_EXCHANGE_ENDPOINT + GET_EXCHANGE_HISTORY_FOR_COUNTRY)
+    ExchangeRateDataDTO getExchangeHistoryForCountry(@PathVariable String[] fields,
+                                                 @PathVariable String currency,
+                                                 @PathVariable String startDate,
+                                                 @PathVariable String endDate);
 }
