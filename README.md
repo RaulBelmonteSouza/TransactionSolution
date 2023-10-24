@@ -22,8 +22,15 @@ It can also be used to list valid currencies and to get exchange information for
 * [**Jacoco**](https://www.jacoco.org/jacoco/trunk/doc/)
 
 # Run/Debug
-* Run the MAVEN build `spring-boot:run` or start Java application `TransactionSolutionApplication`.
+* Run the MAVEN build `spring-boot:run` or start Java application `TransactionSolutionApplication` depending on the IDE that you are using.
 
+If you face problems to run the APP it's recommended to [install maven](https://maven.apache.org/install.html)
+  and use the following maven commands in the root project folder on your terminal:
+
+```bash
+mvn clean install
+mvn spring-boot:run
+```
 
 * You can access Swagger at this URL: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html#/).
  
@@ -38,6 +45,28 @@ It can also be used to list valid currencies and to get exchange information for
 The currency code can be used in the /transactions/{id}?currency={currency} to find a transaction by its id and convert its amount to the informed currency.
 The Second endpoint can get exchange information for specified currency from the date informed within the last six months.
 
+# Test
+* To run the unit and coverage tests you can use the following maven commands.
+
+**To unit tests:**
+
+```bash
+mvn clean test
+```
+**To coverage:**
+```bash
+mvn verify
+```
+
+and you can check the coverage report in the **target/site/jacoco/index.html** file
+
+# Implementation
+
+There are 7 main parts in this project **Transaction Control**, **ExchangeRate Control**, **Client**, **Configuration**, **Exception**, **Search Criteria** and **Migrations**.
+
+## Transaction Control
+
+Transaction control is the part responsible to do all the operations involving transactions, such as saving, retrieving, listing, sorting, filtering, paginating and converting amount based on exchange rate.
 
 Create a transaction with a date, a description and an amount (will be rounded the nearest cent) like in the following payload example. `POST` it to `/transactions`.
 
@@ -50,13 +79,6 @@ Create a transaction with a date, a description and an amount (will be rounded t
 ```
 Please check Swagger and API-Docs for more samples.
 
-# Implementation
-
-There are 7 main parts in this project **Transaction Control**, **ExchangeRate Control**, **Client**, **Configuration**, **Exception**, **Search Criteria** and **Migrations**.
-
-## Transaction Control
-
-Transaction control is the part responsible to do all the operations involving transactions, such as saving, retrieving, listing, sorting, filtering, paginating and converting amount based on exchange rate.
 
 ## ExchangeRate Control
 
