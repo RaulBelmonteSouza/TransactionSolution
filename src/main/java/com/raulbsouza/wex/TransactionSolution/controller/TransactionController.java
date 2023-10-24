@@ -8,11 +8,8 @@ import com.raulbsouza.wex.TransactionSolution.searchcriteria.TransactionSearchCr
 import com.raulbsouza.wex.TransactionSolution.service.TransactionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.websocket.server.PathParam;
+import lombok.extern.slf4j.Slf4j;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,6 +23,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/transactions", produces = MediaType.APPLICATION_JSON_VALUE)
+@Slf4j
 public class TransactionController {
 
     @Autowired

@@ -183,8 +183,8 @@ https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/od
 These two functions can be used in a simpler way in the ExchangeRate endpoints.
 
 ## Configuration
-It's a simple part with just one class that configure a bean to "see" a message source in the message.properties file.
-But the intention of this part is to have a specific place to put general configuration if needed.
+It's a simple part with just two classes, to have a specific place to put general configuration if needed. 
+One class is to configure a bean to "see" a message source in the message.properties file. And the other is to configure the log of the requests received by the API.
 
 ## Exception
 This part is used to deal with the exceptions that can happen during the program execution. It has a GlobalException handles that allows the program to get, treat and return an appropriate response 
