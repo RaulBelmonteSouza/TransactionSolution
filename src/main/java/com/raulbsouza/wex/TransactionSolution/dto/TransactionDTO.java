@@ -1,6 +1,7 @@
 package com.raulbsouza.wex.TransactionSolution.dto;
 
 import com.raulbsouza.wex.TransactionSolution.model.Transaction;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -17,6 +18,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 public class TransactionDTO {
+
     private UUID id;
 
     @Size(max = 50, message = "{description.not-valid}")
@@ -24,6 +26,7 @@ public class TransactionDTO {
 
     @NotNull
     @Positive(message = "{amount.not-valid}")
+    @Schema(description = "Transaction amount - must be a positive number")
     private BigDecimal amount;
 
     @NotNull(message = "{date.null}")
