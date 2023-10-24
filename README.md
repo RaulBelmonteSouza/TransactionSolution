@@ -23,9 +23,17 @@ It can also be used to list valid currencies and to get exchange information for
 
 # Run/Debug
 * Run the MAVEN build `spring-boot:run` or start Java application `TransactionSolutionApplication`.
+
+
 * You can access Swagger at this URL: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html#/).
+ 
+
 * And the ApiDocs at this URL: [http://localhost:8080/api-docs](http://localhost:8080/api-docs) in JSON or [http://localhost:8080/api-docs.yaml](http://localhost:8080/api-docs.yaml) if you prefer yaml.
+
+ 
 * `transaction-controller` contains three endpoints which can be used to create a transaction, list transactions from database using pagination, sort and filters, and finally an endpoint to find a transaction by its id and convert its amount to a informed currency.
+ 
+
 * `exchange-rate-controller` contains two endpoints, one can list all valid country currency for exchange rate from [**Treasury Reporting Rates of Exchange**](https://fiscaldata.treasury.gov/datasets/treasury-reporting-rates-exchange/treasury-reporting-rates-of-exchange). 
 The currency code can be used in the /transactions/{id}?currency={currency} to find a transaction by its id and convert its amount to the informed currency.
 The Second endpoint can get exchange information for specified currency from the date informed within the last six months.
