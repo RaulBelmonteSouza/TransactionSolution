@@ -54,6 +54,18 @@ public class ExchangeRateDTO {
     private String calendarDayNumber;
 
     public ExchangeRate toEntity() {
+
+        if (this.fiscalYear == null)
+            this.fiscalYear = String.valueOf(recordDate.getYear());
+
+        if (this.calendarMonth == null)
+            this.calendarMonth = String.valueOf(recordDate.getMonthValue());
+
+        if (this.calendarDayNumber == null)
+            this.calendarDayNumber = String.valueOf(recordDate.getDayOfMonth());
+
+        FiscalQuarter fiscalQuarter = this.fiscalQuarter == null ? null : FiscalQuarter.valueOf(this.fiscalQuarter);
+
         return ExchangeRate.builder()
                 .recordDate(this.recordDate)
                 .country(this.country)
@@ -63,7 +75,7 @@ public class ExchangeRateDTO {
                 .effectiveDate(this.effectiveDate)
                 .sourceLineNumber(this.sourceLineNumber)
                 .fiscalYear(Year.parse(this.fiscalYear))
-                .fiscalQuarter(FiscalQuarter.valueOf(this.fiscalQuarter))
+                .fiscalQuarter(fiscalQuarter)
                 .calendarMonth(Month.of(Integer.parseInt(this.calendarMonth)))
                 .calendarDayNumber(Integer.parseInt(this.calendarDayNumber))
                 .build();
