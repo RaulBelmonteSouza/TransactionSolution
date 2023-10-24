@@ -14,4 +14,6 @@ public final class ExchangeRateFields {
     public static final String RECORD_CALENDAR_DAY = "record_calendar_day";
     public static final String BASE_URL = "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/";
     public static final String RATES_OF_EXCHANGE_ENDPOINT= "v1/accounting/od/rates_of_exchange";
+
+    public static final String DEFAULT_CURRENCY = "US - Dollars";
 }
