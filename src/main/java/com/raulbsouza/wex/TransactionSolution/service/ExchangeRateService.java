@@ -4,7 +4,6 @@ import com.raulbsouza.wex.TransactionSolution.client.ExchangeRateClient;
 import com.raulbsouza.wex.TransactionSolution.dto.ExchangeRateDataDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -19,10 +18,10 @@ public class ExchangeRateService {
     @Autowired
     private ExchangeRateClient exchangeRateClient;
 
-    public ExchangeRateDataDTO retrieveExchangeRateDate() {
+    public ExchangeRateDataDTO retrieveExchangeRateValidCurrencies() {
         String[] fields = { COUNTRY_CURRENCY_DESC };
         String dateParam = LocalDate.now().minusYears(1).format(DATE_FORMAT);
-        return exchangeRateClient.getExchangeRateDate(fields, dateParam);
+        return exchangeRateClient.getValidCurrencies(fields, dateParam);
     }
 
     public ExchangeRateDataDTO retrieveExchangeForCurrency(String currency, LocalDate date) {

@@ -17,7 +17,7 @@ public interface ExchangeRateClient {
 
     @RequestMapping(method = RequestMethod.GET,
             value = ExchangeRateFields.RATES_OF_EXCHANGE_ENDPOINT + GET_ALL_VALID_CURRENCIES)
-    ExchangeRateDataDTO getExchangeRateDate(@PathVariable String[] fields, @PathVariable String data);
+    ExchangeRateDataDTO getValidCurrencies(@PathVariable String[] fields, @PathVariable String data);
 
     @RequestMapping(method = RequestMethod.GET,
             value = ExchangeRateFields.RATES_OF_EXCHANGE_ENDPOINT + GET_EXCHANGE_HISTORY_FOR_COUNTRY)

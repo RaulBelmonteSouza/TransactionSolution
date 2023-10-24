@@ -24,7 +24,7 @@ public class ExchangeRateController {
             description = "Null fields in the response will be ignored.")
     @GetMapping("/countries")
     public ExchangeRateDataDTO get() {
-        return exchangeRateService.retrieveExchangeRateDate();
+        return exchangeRateService.retrieveExchangeRateValidCurrencies();
     }
 
     @Operation(summary = "Get exchange information for specified currency from the date informed " +
