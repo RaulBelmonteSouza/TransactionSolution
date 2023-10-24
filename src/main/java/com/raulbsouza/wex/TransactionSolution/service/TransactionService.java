@@ -11,6 +11,9 @@ import com.raulbsouza.wex.TransactionSolution.model.ExchangeRate;
 import com.raulbsouza.wex.TransactionSolution.model.Transaction;
 import com.raulbsouza.wex.TransactionSolution.repository.TransactionRepository;
 import com.raulbsouza.wex.TransactionSolution.searchcriteria.SearchCriteria;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +25,15 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Service
+@OpenAPIDefinition(
+        info = @Info(
+                title = "TransactionSolution",
+                description = "Financial transaction solution to store and retrieve transactions.",
+                version = "v1",
+                contact = @Contact(name = "Creator: Raul Souza", url = "https://raulbsouza.com",
+                        email = "raulbelmontedesouza@gmail.com")
+        )
+)
 public class TransactionService {
 
     @Autowired
