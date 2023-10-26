@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(value = "ExchangeRateClient", url = ExchangeRateFields.BASE_URL)
+@FeignClient(value = "ExchangeRateClient",
+        url = ExchangeRateFields.BASE_URL,
+        configuration = ClientConfiguration.class)
 public interface ExchangeRateClient {
 
     String GET_ALL_VALID_CURRENCIES

@@ -40,4 +40,10 @@ public class GlobalExceptionHandler {
         }
         return errors;
     }
+
+    @ExceptionHandler(value = {ExchangeRateClientException.class})
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorDetails exchangeRateClientException(ExchangeRateClientException ex, WebRequest request) {
+        return new ErrorDetails(ex.getMessage(), request.getDescription(false));
+    }
 }
