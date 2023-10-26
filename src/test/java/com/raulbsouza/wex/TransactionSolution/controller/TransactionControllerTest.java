@@ -7,7 +7,6 @@ import com.raulbsouza.wex.TransactionSolution.dto.ExchangeRateDataDTO;
 import com.raulbsouza.wex.TransactionSolution.dto.TransactionDTO;
 import com.raulbsouza.wex.TransactionSolution.model.Transaction;
 import com.raulbsouza.wex.TransactionSolution.repository.TransactionRepository;
-import com.raulbsouza.wex.TransactionSolution.testutils.TestUtils;
 import org.hamcrest.core.Is;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -21,12 +20,14 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
 
 import static com.raulbsouza.wex.TransactionSolution.client.ExchangeRateFields.*;
-import static org.hamcrest.Matchers.*;
+import static com.raulbsouza.wex.TransactionSolution.testutils.TestUtils.DATE_FORMAT;
+import static com.raulbsouza.wex.TransactionSolution.testutils.TestUtils.randomAmount;
+import static org.hamcrest.Matchers.both;
+import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -35,8 +36,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class TransactionControllerTest {
-
-    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ISO_DATE;
     private static final String TRANSACTION_PATH = "/transactions";
 
     @Autowired
@@ -61,12 +60,12 @@ public class TransactionControllerTest {
         Transaction transaction1 = Transaction.builder()
                 .date(LocalDate.now().minusMonths(1))
                 .description("Transaction 1")
-                .amount(TestUtils.randomAmount()).build();
+                .amount(randomAmount()).build();
 
         Transaction transaction2 = Transaction.builder()
                 .date(LocalDate.now().minusMonths(2))
                 .description("Transaction 2")
-                .amount(TestUtils.randomAmount()).build();
+                .amount(randomAmount()).build();
 
         transactionRepository.save(transaction1);
         transactionRepository.save(transaction2);
@@ -86,12 +85,12 @@ public class TransactionControllerTest {
         Transaction transaction1 = Transaction.builder()
                 .date(LocalDate.now().minusMonths(1))
                 .description("Transaction 1")
-                .amount(TestUtils.randomAmount()).build();
+                .amount(randomAmount()).build();
 
         Transaction transaction2 = Transaction.builder()
                 .date(LocalDate.now().minusMonths(2))
                 .description("Transaction 2")
-                .amount(TestUtils.randomAmount()).build();
+                .amount(randomAmount()).build();
 
         transactionRepository.save(transaction1);
         transactionRepository.save(transaction2);
@@ -117,12 +116,12 @@ public class TransactionControllerTest {
         Transaction transaction1 = Transaction.builder()
                 .date(LocalDate.now().minusMonths(1))
                 .description("Transaction 1")
-                .amount(TestUtils.randomAmount()).build();
+                .amount(randomAmount()).build();
 
         Transaction transaction2 = Transaction.builder()
                 .date(LocalDate.now().minusMonths(2))
                 .description("Transaction 2")
-                .amount(TestUtils.randomAmount()).build();
+                .amount(randomAmount()).build();
 
         transactionRepository.save(transaction1);
         transactionRepository.save(transaction2);
@@ -146,7 +145,7 @@ public class TransactionControllerTest {
         Transaction transaction = Transaction.builder()
                 .date(date)
                 .description("Transaction 1")
-                .amount(TestUtils.randomAmount()).build();
+                .amount(randomAmount()).build();
 
         Transaction transactionEntity = transactionRepository.save(transaction);
 
@@ -172,7 +171,7 @@ public class TransactionControllerTest {
         Transaction transaction = Transaction.builder()
                 .date(date)
                 .description("Transaction 1")
-                .amount(TestUtils.randomAmount()).build();
+                .amount(randomAmount()).build();
 
         Transaction transactionEntity = transactionRepository.save(transaction);
 
@@ -200,7 +199,7 @@ public class TransactionControllerTest {
                 .id(UUID.randomUUID())
                 .date(LocalDate.now())
                 .description("Transaction 1")
-                .amount(TestUtils.randomAmount()).build();
+                .amount(randomAmount()).build();
 
         this.mockMvc.perform(get(TRANSACTION_PATH + "/{id}", transaction.getId())
                         .param("currency", currency))
@@ -212,7 +211,7 @@ public class TransactionControllerTest {
     void shouldCreateTransaction() throws Exception {
         TransactionDTO transactionDTO = TransactionDTO.builder()
                 .description("Transaction")
-                .amount(TestUtils.randomAmount())
+                .amount(randomAmount())
                 .date(LocalDate.now().minusMonths(1))
                 .build();
 
@@ -257,13 +256,13 @@ public class TransactionControllerTest {
     private ExchangeRateDataDTO getExchangeRateDataDto(LocalDate date) {
         ExchangeRateDTO exchangeRateDTO1 = ExchangeRateDTO.builder()
                 .countryCurrencyDesc("Fake-Currency")
-                .exchangeRate(TestUtils.randomAmount().toString())
+                .exchangeRate(randomAmount().toString())
                 .recordDate(date.minusMonths(1))
                 .build();
 
         ExchangeRateDTO exchangeRateDTO2 = ExchangeRateDTO.builder()
                 .countryCurrencyDesc("Fake-Currency2")
-                .exchangeRate(TestUtils.randomAmount().toString())
+                .exchangeRate(randomAmount().toString())
                 .recordDate(date.minusMonths(2))
                 .build();
 
