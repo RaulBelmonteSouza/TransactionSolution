@@ -8,7 +8,6 @@ import com.raulbsouza.wex.TransactionSolution.dto.TransactionDTO;
 import com.raulbsouza.wex.TransactionSolution.model.Transaction;
 import com.raulbsouza.wex.TransactionSolution.repository.TransactionRepository;
 import com.raulbsouza.wex.TransactionSolution.testutils.TestUtils;
-import org.hamcrest.Matchers;
 import org.hamcrest.core.Is;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -28,7 +27,6 @@ import java.util.UUID;
 
 import static com.raulbsouza.wex.TransactionSolution.client.ExchangeRateFields.*;
 import static org.hamcrest.Matchers.*;
-import static org.mockito.ArgumentMatchers.contains;
 import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
