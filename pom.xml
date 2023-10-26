@@ -113,6 +113,9 @@
 				<configuration>
 					<excludes>
 						<exclude>com/raulbsouza/wex/TransactionSolution/TransactionSolutionApplication.class</exclude>
+						<exclude>com/raulbsouza/wex/TransactionSolution/client/*</exclude>
+						<exclude>com/raulbsouza/wex/TransactionSolution/searchcriteria/*</exclude>
+						<exclude>com/raulbsouza/wex/TransactionSolution/searchcriteria/specifications/*</exclude>
 					</excludes>
 				</configuration>
 				<executions>
