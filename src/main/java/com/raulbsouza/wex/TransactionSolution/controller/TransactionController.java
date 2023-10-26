@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,7 @@ public class TransactionController {
 
     @Operation(summary = "Create and save new Transaction")
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public TransactionDTO saveTransaction(@RequestBody @Validated TransactionDTO transactionDTO) {
         return transactionService.createTransaction(transactionDTO);
     }
