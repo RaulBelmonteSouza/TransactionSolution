@@ -19,7 +19,7 @@ public class GlobalExceptionHandler {
 
     Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
     @ExceptionHandler(value = {Exception.class})
-    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorDetails genericException(Exception ex, WebRequest request) {
         logger.error(ex.getMessage());
         return new ErrorDetails(ex.getMessage(), request.getDescription(false));
