@@ -23,7 +23,7 @@ public class ExchangeRateController {
     @Operation(summary = "List all valid country currency for exchange rate.",
             description = "Null fields in the response will be ignored.")
     @GetMapping("/countries")
-    public ExchangeRateDataDTO get() {
+    public ExchangeRateDataDTO getValidCountryCurrencies() {
         return exchangeRateService.retrieveExchangeRateValidCurrencies();
     }
 
