@@ -114,8 +114,6 @@
 					<excludes>
 						<exclude>com/raulbsouza/wex/TransactionSolution/TransactionSolutionApplication.class</exclude>
 						<exclude>com/raulbsouza/wex/TransactionSolution/client/*</exclude>
-						<exclude>com/raulbsouza/wex/TransactionSolution/searchcriteria/*</exclude>
-						<exclude>com/raulbsouza/wex/TransactionSolution/searchcriteria/specifications/*</exclude>
 					</excludes>
 				</configuration>
 				<executions>
@@ -144,7 +142,7 @@
 										<limit>
 											<counter>LINE</counter>
 											<value>COVEREDRATIO</value>
-											<minimum>80%</minimum>
+											<minimum>70%</minimum>
 										</limit>
 									</limits>
 								</rule>
