@@ -24,8 +24,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static com.raulbsouza.wex.TransactionSolution.client.ExchangeRateFields.*;
-import static com.raulbsouza.wex.TransactionSolution.testutils.TestUtils.DATE_FORMAT;
-import static com.raulbsouza.wex.TransactionSolution.testutils.TestUtils.randomAmount;
+import static com.raulbsouza.wex.TransactionSolution.testutils.TestUtils.*;
 import static org.hamcrest.Matchers.both;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.doReturn;
@@ -140,7 +139,6 @@ public class TransactionControllerTest {
     @Test
     void shouldGetTransactionByIdAndCurrency() throws Exception {
         LocalDate date = LocalDate.now().minusMonths(1);
-        String currency = "Fake-Currency";
 
         Transaction transaction = Transaction.builder()
                 .date(date)
@@ -155,18 +153,17 @@ public class TransactionControllerTest {
 
         doReturn(getExchangeRateDataDto(date))
                 .when(client)
-                .getExchangeHistoryForCountry(fields, currency, startDate, endDate);
+                .getExchangeHistoryForCountry(fields, FAKE_CURRENCY, startDate, endDate);
 
         this.mockMvc.perform(get(TRANSACTION_PATH + "/{id}", transactionEntity.getId())
-                .param("currency", currency))
+                .param("currency", FAKE_CURRENCY))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.conversionCurrency", Is.is(currency)));
+                .andExpect(jsonPath("$.conversionCurrency", Is.is(FAKE_CURRENCY)));
     }
 
     @Test
     void givenEmptyExchangeData_whenGetTransactionByIdAndCurrency_thenBadRequest() throws Exception {
         LocalDate date = LocalDate.now().minusMonths(1);
-        String currency = "Fake-Currency";
 
         Transaction transaction = Transaction.builder()
                 .date(date)
@@ -181,10 +178,10 @@ public class TransactionControllerTest {
 
         doReturn(new ExchangeRateDataDTO(List.of()))
                 .when(client)
-                .getExchangeHistoryForCountry(fields, currency, startDate, endDate);
+                .getExchangeHistoryForCountry(fields, FAKE_CURRENCY, startDate, endDate);
 
         this.mockMvc.perform(get(TRANSACTION_PATH + "/{id}", transactionEntity.getId())
-                        .param("currency", currency))
+                        .param("currency", FAKE_CURRENCY))
                 .andExpect(status().isBadRequest())
                 .andExpect(
                         jsonPath("$.message",
@@ -194,7 +191,6 @@ public class TransactionControllerTest {
     @Test
     void givenNonExistentTransaction_whenGetTransactionByIdAndCurrency_thenNotFound()
             throws Exception {
-        String currency = "Fake-Currency";
         Transaction transaction = Transaction.builder()
                 .id(UUID.randomUUID())
                 .date(LocalDate.now())
@@ -202,7 +198,7 @@ public class TransactionControllerTest {
                 .amount(randomAmount()).build();
 
         this.mockMvc.perform(get(TRANSACTION_PATH + "/{id}", transaction.getId())
-                        .param("currency", currency))
+                        .param("currency", FAKE_CURRENCY))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.message", Is.is("Transaction not found")));
     }
@@ -252,23 +248,5 @@ public class TransactionControllerTest {
                 .andExpect(
                         jsonPath("$.violations[0].message", Is.is("Amount must be a positive number")));
     }
-
-    private ExchangeRateDataDTO getExchangeRateDataDto(LocalDate date) {
-        ExchangeRateDTO exchangeRateDTO1 = ExchangeRateDTO.builder()
-                .countryCurrencyDesc("Fake-Currency")
-                .exchangeRate(randomAmount().toString())
-                .recordDate(date.minusMonths(1))
-                .build();
-
-        ExchangeRateDTO exchangeRateDTO2 = ExchangeRateDTO.builder()
-                .countryCurrencyDesc("Fake-Currency2")
-                .exchangeRate(randomAmount().toString())
-                .recordDate(date.minusMonths(2))
-                .build();
-
-        return new ExchangeRateDataDTO(List.of(exchangeRateDTO1, exchangeRateDTO2));
-    }
-
-
 
 }

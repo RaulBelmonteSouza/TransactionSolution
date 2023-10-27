@@ -18,8 +18,7 @@ import java.lang.reflect.UndeclaredThrowableException;
 import java.time.LocalDate;
 import java.util.List;
 
-import static com.raulbsouza.wex.TransactionSolution.testutils.TestUtils.DATE_FORMAT;
-import static com.raulbsouza.wex.TransactionSolution.testutils.TestUtils.randomAmount;
+import static com.raulbsouza.wex.TransactionSolution.testutils.TestUtils.*;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -45,8 +44,8 @@ public class ExchangeRateControllerTest {
     @Test
     void shouldFetchAllValidCurrencies() throws Exception {
 
-        ExchangeRateDTO exchangeRateDTO1 = ExchangeRateDTO.builder().countryCurrencyDesc("Fake-Currency1").build();
-        ExchangeRateDTO exchangeRateDTO2 = ExchangeRateDTO.builder().countryCurrencyDesc("Fake-Currency2").build();
+        ExchangeRateDTO exchangeRateDTO1 = ExchangeRateDTO.builder().countryCurrencyDesc(FAKE_CURRENCY).build();
+        ExchangeRateDTO exchangeRateDTO2 = ExchangeRateDTO.builder().countryCurrencyDesc(FAKE_CURRENCY).build();
 
         ExchangeRateDataDTO exchangeRateDataDTO = new ExchangeRateDataDTO(List.of(exchangeRateDTO1, exchangeRateDTO2));
 
@@ -69,16 +68,14 @@ public class ExchangeRateControllerTest {
 
     @Test
     void shouldGetExchangeForCurrency() throws Exception {
-        String currency = "Fake-Currency";
-
         ExchangeRateDTO exchangeRateDTO1 = ExchangeRateDTO.builder()
-                .countryCurrencyDesc(currency)
+                .countryCurrencyDesc(FAKE_CURRENCY)
                 .exchangeRate(randomAmount().toString())
                 .recordDate(LocalDate.now().minusDays(2))
                 .build();
 
         ExchangeRateDTO exchangeRateDTO2 = ExchangeRateDTO.builder()
-                .countryCurrencyDesc(currency)
+                .countryCurrencyDesc(FAKE_CURRENCY)
                 .exchangeRate(randomAmount().toString())
                 .recordDate(LocalDate.now().minusDays(3))
                 .build();
@@ -93,7 +90,7 @@ public class ExchangeRateControllerTest {
                         ArgumentMatchers.any(String.class));
 
         mockMvc.perform(get(EXCHANGE_RATES_PATH)
-                        .param("currency", currency)
+                        .param("currency", FAKE_CURRENCY)
                         .param("date", LocalDate.now().format(DATE_FORMAT)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data.length()", Is.is(2)));
